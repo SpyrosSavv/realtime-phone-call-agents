@@ -54,8 +54,8 @@ class FastRTCAgent:
             tools: List of tools for the agent (defaults to property search tool)
         """
 
-        self.stt_model = stt_model or get_stt_model()
-        self.tts_model = tts_model or get_tts_model()
+        self._stt_model = stt_model or get_stt_model()
+        self._tts_model = tts_model or get_tts_model()
         self._voice_effect = voice_effect or get_sound_effect()
 
         # Create the ReAct agent
