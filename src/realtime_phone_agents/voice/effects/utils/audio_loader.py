@@ -20,7 +20,7 @@ def load_audio_chunks(
     chunks: List[AudioChunk] = []
 
     for i in range(0, len(samples), samples_per_chunk):
-        chunk = samples[i : i _ samples_per_chunk]
+        chunk = samples[i : i + samples_per_chunk]
         if len(chunk) == 0:
             continue
         chunks.append((target_rate, chunk))
