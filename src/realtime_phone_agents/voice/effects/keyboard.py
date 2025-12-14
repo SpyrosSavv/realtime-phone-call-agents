@@ -20,13 +20,12 @@ class KeyboardEffect(BaseVoiceEffect):
         chunk_ms: int = 100,
         target_rate: int = 16000,
     ):
-
         self.path = path
         self.max_duration_s = max_duration_s
         self.chunks: List[AudioChunk] = load_audio_chunks(
             path=path,
             target_rate=target_rate,
-            chunk_ms=chunk_ms
+            chunk_ms=chunk_ms,
         )
 
     async def stream(self) -> AsyncIterator[AudioChunk]:
@@ -37,18 +36,19 @@ class KeyboardEffect(BaseVoiceEffect):
         total_samples_allowed = None
 
         for sample_rate, chunk in self.chunks:
-
+            # lazy initialize allowed sample budget
             if total_samples_allowed is None:
                 total_samples_allowed = int(self.max_duration_s * sample_rate)
-            
+
             if total_samples >= total_samples_allowed:
                 break
 
             remaining_samples = total_samples_allowed - total_samples
 
+            # Trim last chunk if needed
             if len(chunk) > remaining_samples:
                 chunk = chunk[:remaining_samples]
-            
+
             if len(chunk) == 0:
                 break
 
