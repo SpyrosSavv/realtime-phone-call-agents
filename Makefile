@@ -22,3 +22,8 @@ format-check:
 
 lint-check:
 	uv run ruff check $(CHECK_DIRS)
+
+# Run Gradio app
+
+start-gradio-application:
+	uv run python scripts/run_gradio_application.py
