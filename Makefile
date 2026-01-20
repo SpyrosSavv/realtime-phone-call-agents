@@ -27,3 +27,11 @@ lint-check:
 
 start-gradio-application:
 	uv run python scripts/run_gradio_application.py
+
+# Application Local Deployment
+
+start-call-center:
+	docker compose up -d
+
+stop-call-center:
+	docker compose down
