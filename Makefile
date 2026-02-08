@@ -35,3 +35,9 @@ start-call-center:
 
 stop-call-center:
 	docker compose down
+
+start-ngrok-tunnel:
+	@echo "Starting ngrok tunnel on port 8000..."
+	@echo "Remember to close the tunnel when you're done!"
+	sleep 5 # Wait for the tunnel to be ready
+	ngrok http 8000
